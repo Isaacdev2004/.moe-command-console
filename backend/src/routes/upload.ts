@@ -8,10 +8,10 @@ const router = Router();
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (req: any, file: any, cb: any) => {
     cb(null, 'uploads/');
   },
-  filename: (req, file, cb) => {
+  filename: (req: any, file: any, cb: any) => {
     const uniqueName = `${uuidv4()}-${Date.now()}${path.extname(file.originalname)}`;
     cb(null, uniqueName);
   }
@@ -48,7 +48,7 @@ const upload = multer({
 });
 
 // Single file upload
-router.post('/single', authenticateToken, upload.single('file'), (req: Request, res: Response) => {
+router.post('/single', authenticateToken, upload.single('file'), (req: any, res: Response) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
@@ -76,7 +76,7 @@ router.post('/single', authenticateToken, upload.single('file'), (req: Request, 
 });
 
 // Multiple files upload
-router.post('/multiple', authenticateToken, upload.array('files', 5), (req: Request, res: Response) => {
+router.post('/multiple', authenticateToken, upload.array('files', 5), (req: any, res: Response) => {
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: 'No files uploaded' });
@@ -105,7 +105,7 @@ router.post('/multiple', authenticateToken, upload.array('files', 5), (req: Requ
 });
 
 // Get uploaded files for user
-router.get('/files', authenticateToken, (req: Request, res: Response) => {
+router.get('/files', authenticateToken, (req: any, res: Response) => {
   try {
     // In a real application, you would query a database
     // For now, we'll return a mock response
@@ -120,7 +120,7 @@ router.get('/files', authenticateToken, (req: Request, res: Response) => {
 });
 
 // Delete file
-router.delete('/files/:fileId', authenticateToken, (req: Request, res: Response) => {
+router.delete('/files/:fileId', authenticateToken, (req: any, res: Response) => {
   try {
     const { fileId } = req.params;
     

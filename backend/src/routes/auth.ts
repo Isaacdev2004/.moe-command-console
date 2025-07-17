@@ -116,7 +116,7 @@ router.post('/login', validateLogin, async (req: Request, res: Response) => {
 });
 
 // Verify token middleware
-export const authenticateToken = (req: Request, res: Response, next: any) => {
+export const authenticateToken = (req: any, res: Response, next: any) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -134,7 +134,7 @@ export const authenticateToken = (req: Request, res: Response, next: any) => {
 };
 
 // Get current user route
-router.get('/me', authenticateToken, (req: Request, res: Response) => {
+router.get('/me', authenticateToken, (req: any, res: Response) => {
   const user = users.find(u => u.id === req.user?.userId);
   if (!user) {
     return res.status(404).json({ error: 'User not found' });

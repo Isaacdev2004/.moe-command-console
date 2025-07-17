@@ -4,7 +4,7 @@ import { authenticateToken } from './auth.js';
 const router = Router();
 
 // Protected route example
-router.get('/protected', authenticateToken, (req: Request, res: Response) => {
+router.get('/protected', authenticateToken, (req: any, res: Response) => {
   res.json({
     message: 'This is a protected route',
     user: req.user
@@ -12,7 +12,7 @@ router.get('/protected', authenticateToken, (req: Request, res: Response) => {
 });
 
 // Get user profile
-router.get('/profile', authenticateToken, (req: Request, res: Response) => {
+router.get('/profile', authenticateToken, (req: any, res: Response) => {
   res.json({
     message: 'User profile retrieved successfully',
     user: req.user
@@ -20,7 +20,7 @@ router.get('/profile', authenticateToken, (req: Request, res: Response) => {
 });
 
 // Update user profile
-router.put('/profile', authenticateToken, (req: Request, res: Response) => {
+router.put('/profile', authenticateToken, (req: any, res: Response) => {
   const { name, email } = req.body;
   
   // In a real application, you would update the database
@@ -41,7 +41,7 @@ router.get('/status', (req: Request, res: Response) => {
 });
 
 // Sample data endpoint
-router.get('/data', authenticateToken, (req: Request, res: Response) => {
+router.get('/data', authenticateToken, (req: any, res: Response) => {
   const sampleData = [
     { id: 1, name: 'Item 1', description: 'Description for item 1' },
     { id: 2, name: 'Item 2', description: 'Description for item 2' },
